@@ -1,0 +1,41 @@
+import re
+
+def respond_to_query(query):
+    query = query.lower()
+
+    if "print" in query:
+        return "The print() function in Python is used to display output to the console. For example: print('Hello, world!')"
+    elif re.search(r"how do i (loop|iterate)", query):
+        return "You can loop in Python using for loops or while loops. Here's a basic for loop example:\npython\nfor i in range(5):\n    print(i)\n"
+    elif re.search(r"what is a (list|tuple|dictionary)", query):
+        match = re.search(r"what is a (list|tuple|dictionary)", query)
+        data_structure = match.group(1)
+        if data_structure == "list":
+            return "A list is an ordered, mutable collection of items in Python, enclosed in square brackets []."
+        elif data_structure == "tuple":
+            return "A tuple is an ordered, immutable collection of items in Python, enclosed in parentheses ()."
+        elif data_structure == "dictionary":
+            return "A dictionary is an unordered collection of key-value pairs in Python, enclosed in curly braces {}."
+    elif "error" in query or "traceback" in query:
+        return "Could you please provide the specific error message or traceback? I'll do my best to help you understand it."
+    elif re.search(r"how to define a (function|class)", query):
+        match = re.search(r"how to define a (function|class)", query)
+        definition_type = match.group(1)
+        if definition_type == "function":
+            return "You can define a function in Python using the def keyword:\npython\ndef greet(name):\n    print(f'Hello, {name}!')\n"
+        elif definition_type == "class":
+            return "You can define a class in Python using the class keyword:\npython\nclass MyClass:\n    def __init__(self, value):\n        self.value = value\n\n    def display(self):\n        print(self.value)\n"
+    else:
+        return "That's an interesting question! However, my current knowledge base is limited. Could you try rephrasing or asking something else?"
+
+def main():
+    print("Welcome to the Simple Python Support Bot!")
+    while True:
+        query = input("Ask me a Python question (or type 'exit' to quit): ")
+        if query.lower() == 'exit':
+            break
+        response = respond_to_query(query)
+        print(response)
+
+if _name_ == "_main_":
+    main()
